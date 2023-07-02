@@ -41,6 +41,50 @@ public class ItemDataController {
     }
 
     @RequestMapping(
+            method = RequestMethod.GET,
+            value = "/public/api/resetItemData"
+    )
+    public ResponseEntity<String> publicApiResetItemData() {
+        try {
+            this.itemDataService.resetData();
+            return ResponseEntity.ok("Data reset successfully");
+        } catch (Exception e){
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error reading item data.");
+
+        }
+    }
+
+
+    @RequestMapping(
+            method = RequestMethod.GET,
+            value = "/public/api/exportItemData"
+    )
+    public ResponseEntity<String> publicApiexportItemData() {
+        try {
+            this.itemDataService.exportFile();
+            return ResponseEntity.ok("Data exported successfully");
+        } catch (Exception e){
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error reading item data.");
+        }
+    }
+
+    @RequestMapping(
+            method = RequestMethod.GET,
+            value = "/public/api/importItemData"
+    )
+    public ResponseEntity<String> publicApiimportItemData() {
+        try {
+            this.itemDataService.importFile();
+            return ResponseEntity.ok("Data exported successfully");
+        } catch (Exception e){
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error reading item data.");
+        }
+    }
+
+    @RequestMapping(
             method = RequestMethod.POST,
             value = "/public/api/saveItemData"
     )
