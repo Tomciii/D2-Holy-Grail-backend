@@ -16,15 +16,11 @@ public class ItemDataService {
 
     final private String fileName = "static/item-data.json";
 
-    @Value("${my.filepath}")
-    private String filePath;
-
     private final String fullPath;
 
     private String currentJson;
 
     public ItemDataService(@Value("${my.filepath}") String filePath){
-        this.filePath = filePath;
         this.fullPath = filePath + fileName;
     }
 
