@@ -5,16 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.io.IOException;
 
-@CrossOrigin(origins = "http://localhost:4200")
 @Controller
-public class ItemDataController {
+public class ItemDataController implements PublicApi {
 
     private ItemDataService itemDataService;
 
@@ -23,12 +19,6 @@ public class ItemDataController {
         this.itemDataService = itemDataService;
     }
 
-
-    @RequestMapping(
-            method = RequestMethod.GET,
-            value = "/public/api/getItemData",
-            produces = {"application/json"}
-    )
     public ResponseEntity<String> publicApiGetItemData() {
         try {
             String itemData = this.itemDataService.getData();
@@ -40,10 +30,6 @@ public class ItemDataController {
         }
     }
 
-    @RequestMapping(
-            method = RequestMethod.GET,
-            value = "/public/api/resetItemData"
-    )
     public ResponseEntity<String> publicApiResetItemData() {
         try {
             this.itemDataService.resetData();
@@ -55,11 +41,6 @@ public class ItemDataController {
         }
     }
 
-
-    @RequestMapping(
-            method = RequestMethod.GET,
-            value = "/public/api/exportItemData"
-    )
     public ResponseEntity<String> publicApiexportItemData() {
         try {
             this.itemDataService.exportFile();
@@ -70,10 +51,6 @@ public class ItemDataController {
         }
     }
 
-    @RequestMapping(
-            method = RequestMethod.GET,
-            value = "/public/api/importItemData"
-    )
     public ResponseEntity<String> publicApiimportItemData() {
         try {
             this.itemDataService.importFile();
@@ -84,10 +61,6 @@ public class ItemDataController {
         }
     }
 
-    @RequestMapping(
-            method = RequestMethod.POST,
-            value = "/public/api/saveItemData"
-    )
     public ResponseEntity<String> publicApiSaveItemData(@RequestBody String jsonData) {
         try {
             this.itemDataService.saveData(jsonData);
